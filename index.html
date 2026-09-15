@@ -701,33 +701,64 @@
 
         <h3>Demander un devis</h3>
 
-        <form action="mailto:proservicenettoyages@gmail.com"
-              method="post"
-              enctype="text/plain">
+        <form id="devis-form">
 
-          <input type="text" name="Nom" placeholder="Votre nom ou entreprise" required>
+  <input type="text" id="nom" placeholder="Votre nom ou entreprise" required>
 
-          <input type="tel" name="Téléphone" placeholder="Votre téléphone" required>
+  <input type="tel" id="telephone" placeholder="Votre téléphone" required>
 
-          <input type="email" name="Email" placeholder="Votre adresse e-mail" required>
+  <input type="email" id="email" placeholder="Votre adresse e-mail" required>
 
-          <select name="Prestation">
-            <option value="">Type de prestation</option>
-            <option>Nettoyage de bureaux</option>
-            <option>Nettoyage industriel</option>
-            <option>Entretien de locaux</option>
-            <option>Nettoyage de vitres</option>
-            <option>Remise en état</option>
-            <option>Autre</option>
-          </select>
+  <select id="prestation" required>
+    <option value="">Type de prestation</option>
+    <option>Nettoyage de bureaux</option>
+    <option>Nettoyage industriel</option>
+    <option>Entretien de locaux</option>
+    <option>Nettoyage de vitres</option>
+    <option>Remise en état</option>
+    <option>Prestation sur mesure</option>
+  </select>
 
-          <textarea name="Message" placeholder="Décrivez votre besoin..." required></textarea>
+  <textarea id="message" placeholder="Décrivez votre besoin..." required></textarea>
 
-          <button class="btn" type="submit">
-            Envoyer ma demande
-          </button>
+  <button class="btn" type="submit">
+    Envoyer ma demande
+  </button>
 
-        </form>
+</form>
+
+<script>
+document.getElementById("devis-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const nom = document.getElementById("nom").value;
+    const telephone = document.getElementById("telephone").value;
+    const email = document.getElementById("email").value;
+    const prestation = document.getElementById("prestation").value;
+    const message = document.getElementById("message").value;
+
+    const sujet = encodeURIComponent("Demande de devis - PROSERVICENETTOYAGES PLUS");
+
+    const corps = encodeURIComponent(
+        "Bonjour,\n\n" +
+        "Nouvelle demande de devis :\n\n" +
+        "Nom / entreprise : " + nom + "\n" +
+        "Téléphone : " + telephone + "\n" +
+        "E-mail : " + email + "\n" +
+        "Prestation : " + prestation + "\n\n" +
+        "Besoin :\n" + message + "\n\n" +
+        "Cordialement"
+    );
+
+    window.location.href =
+        "mailto:proservicenettoyages@gmail.com?subject=" +
+        sujet + "&body=" + corps;
+  });
+</script>
+
+      </div>
+});
+</script>
 
       </div>
 
